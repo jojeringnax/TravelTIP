@@ -16,6 +16,7 @@ class CreatePointsInRouteTable extends Migration
         Schema::create('points_in_route', function (Blueprint $table) {
             $table->unsignedBigInteger('route_id');
             $table->unsignedBigInteger('point_id')->nullable();
+            $table->integer('point_number')->default(1);
             $table->timestamps();
         });
 

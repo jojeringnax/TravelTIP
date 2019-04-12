@@ -24,6 +24,6 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return PointInRoute::getPointsOfRoute(1);
+        return view('home');
     }
 }

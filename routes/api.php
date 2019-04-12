@@ -16,3 +16,9 @@ use Illuminate\Http\Request;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+
+Route::get('points', function() {
+    return \App\Point::all()->toJson();
+});
+
+Route::post('point/create', 'Admin\PointController@create');
