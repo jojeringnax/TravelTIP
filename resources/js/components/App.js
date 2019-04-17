@@ -6,26 +6,22 @@ import PointsIndex from './points/PointsIndex'
 import PointCreate from './points/PointCreate'
 
 
+
+
+
+
+
 class App extends Component {
-    constructor() {
-        super();
-        this.state = {
-            map: new google.maps.Map(document.getElementById('map'), {
-                center: {lat: -34.397, lng: 150.644},
-                zoom: 8
-            })
-        };
-    }
 
 
     render () {
         return (
             <BrowserRouter>
-                <div>
+                <div id="main_wrapper">
                     <Header />
                     <Switch>
                         <Route exact path='/points' component={PointsIndex} />
-                        <Route path='/point/create' component={PointCreate} />
+                        <Route exact path='/point/create' component={PointCreate} />
                     </Switch>
                 </div>
             </BrowserRouter>

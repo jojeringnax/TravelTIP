@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Psy\Util\Json;
 
 /**
  * Class Route
@@ -50,12 +51,26 @@ class Route extends Model
     }
 
     /**
-     * @return Point[]
+     * @return array
      */
     public function getPoints()
     {
-        $connects = PointInRoute::where('route_id', $this->id)->pluck('point_id')->toArray();
-        return Point::whereIn('id', $connects)->get();
+        $connects = PointInRoute::where('route_id', $this->id)->orderBy('point_number')->get();
+        foreach ($connects as $connect) {
+            $resultArray[] = [
+                'point' => Point::find($connect->point_id),
+                'number' => $connect->point_number
+            ];
+        }
+        return isset($resultArray) ? $resultArray : [];
+    }
+
+    /**
+     * @return PointInRoute[]
+     */
+    public function getPointConnects()
+    {
+        return PointInRoute::where('route_id', $this->id)->get();
     }
 
     /**
@@ -64,6 +79,43 @@ class Route extends Model
     public function comments()
     {
         return self::hasMany(Comment::class, 'route_id', 'id');
+    }
+
+    /**
+     * @return bool|null
+     * @throws \Exception
+     */
+    public function delete()
+    {
+        PointInRoute::where('route_id', $this->id)->delete();
+        PhotoConnect::where('connection_id', $this->id)->where('type', PhotoConnect::ROUTE)->delete();
+        return parent::delete();
+    }
+
+    /**
+     * @return string
+     */
+    public function getWithPoints()
+    {
+        return Json::encode([
+            'route' => $this,
+            'points' => $this->getPoints()
+        ]);
+    }
+
+    /**
+     * @return string
+     */
+    public static function getAllRoutesWithPoints()
+    {
+        $routes = Route::All();
+        foreach($routes as $route) {
+            $resultArray[] = [
+                'route' => $route,
+                'points' => $route->getPoints()
+            ];
+        }
+        return Json::encode($resultArray);
     }
 
 }

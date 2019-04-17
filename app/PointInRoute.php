@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property integer $route_id
  * @property integer $point_id
+ * @property integer $point_number
  *
  */
 class PointInRoute extends Model
@@ -24,7 +25,8 @@ class PointInRoute extends Model
      */
     protected $fillable = [
         'route_id',
-        'point_id'
+        'point_id',
+        'point_number'
     ];
 
 }
