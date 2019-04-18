@@ -23,6 +23,18 @@ Route::get('/verifyemail/{token}', 'Auth\RegisterController@verify');
 Route::get('isAdmin', 'Admin\MainController@isAdmin');
 
 
+/**
+ * API Routes with User need
+ */
+
+
+
+
+
+/**
+ * Passport
+ */
+
 Route::get('/redirect', function () {
     $query = http_build_query([
         'client_id' => '4',

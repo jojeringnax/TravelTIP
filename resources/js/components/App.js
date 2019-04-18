@@ -4,10 +4,14 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import Header from './Header'
 import PointsIndex from './points/PointsIndex'
 import PointCreate from './points/PointCreate'
+import Main from './Main'
+import Routes from './Routes'
+import RouteShow from './RouteShow'
 
 
-
-
+const RouteToShow = ({ match }) => (
+    <RouteShow id={match.params.id} />
+);
 
 
 
@@ -20,8 +24,12 @@ class App extends Component {
                 <div id="main_wrapper">
                     <Header />
                     <Switch>
-                        <Route exact path='/points' component={PointsIndex} />
-                        <Route exact path='/point/create' component={PointCreate} />
+                        <Route exact path='/' component={Main} />
+                        <Route path='/admin/points' component={PointsIndex} />
+                        <Route exact path='/admin/point/create' component={PointCreate} />
+                        <Route path='/routes' component={Routes} />
+                        <Route path='/route/:id' component={RouteToShow} />
+                        <Route path='/generator' component={Routes} />
                     </Switch>
                 </div>
             </BrowserRouter>

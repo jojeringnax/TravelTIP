@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 use Psy\Util\Json;
 
 /**
@@ -101,6 +102,36 @@ class Route extends Model
             'route' => $this,
             'points' => $this->getPoints()
         ]);
+    }
+
+    /**
+     *
+     * @return bool
+     */
+    public function isPaid() {
+        return PaidRoute::where('route_id', $this->id)->where('user_id', Auth::user()->id)->get()->toJson() !== '[]';
+    }
+
+    /**
+     * @param $paymentID
+     * @return bool
+     */
+    public function pay($paymentID)
+    {
+        $paidRoute = new PaidRoute();
+        $paidRoute->route_id = $this->id;
+        $paidRoute->payment_id = $paymentID;
+        $paidRoute->user_id = Auth::user()->id;
+        return $paidRoute->save();
+    }
+
+    /**
+     * @return array
+     */
+    public static function getPaid()
+    {
+        $paidIDs = PaidRoute::getPaidRoutesIDsForCurrentUser();
+        return var_dump(self::whereIn('id', $paidIDs)->get());
     }
 
     /**

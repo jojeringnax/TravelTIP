@@ -20,7 +20,12 @@ class CreateRoutesTable extends Migration
             $table->tinyInteger('status')->default(0);
             $table->integer('duration')->default(0);
             $table->integer('length')->default(0);
+            $table->unsignedBigInteger('type_id')->nullable();
             $table->timestamps();
+        });
+
+        Schema::table('routes', function(Blueprint $table) {
+            $table->foreign('type_id')->references('id')->on('route_types')->onDelete('SET NULL');
         });
     }
 

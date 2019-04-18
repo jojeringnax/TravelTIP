@@ -3,9 +3,24 @@ import { Link } from 'react-router-dom'
 
 const Header = () => (
     <nav className='navbar navbar-expand-md navbar-light navbar-laravel' id='navigation'>
-        <div className='container'>
-            <Link className='navbar-brand' to='/'>Tasksman</Link>
-        </div>
+        <Link className='navbar-brand' to='/'>traveltip</Link>
+        <ul className="navbar-nav">
+            <li className="nav-item">
+                <a className="nav-link" href="/routes">Routes</a>
+            </li>
+            <li className="nav-item">
+                <a className="nav-link" href="/generator">Generator</a>
+            </li>
+            <li className="nav-item">
+                <a className="nav-link" href="/about_us">About us</a>
+            </li>
+            <li className="nav-item">
+                <a className="nav-link" href="/conditions">Conditions</a>
+            </li>
+            <li className="nav-item">
+                <a className="nav-link" href="/reviews">Reviews</a>
+            </li>
+        </ul>
     </nav>
 );
 

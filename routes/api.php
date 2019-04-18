@@ -15,6 +15,21 @@ use Illuminate\Support\Facades\Route;
 */
 
 
+
+Route::get('/user', function() {
+    return Auth::user()->toJson();
+});
+
+
+Route::get('/route/{id}', function($id) {
+    return \App\Route::find($id)->getWithPoints();
+});
+
+Route::get('/routes', function(\Illuminate\Http\Request $request) {
+    return \App\Route::getAllRoutesWithPoints();
+});
+
+
 Route::group(['middleware' => ['auth:api']], function () {
 
     Route::get('points', function() {
@@ -25,13 +40,6 @@ Route::group(['middleware' => ['auth:api']], function () {
         return \App\Point::find($id)->toJson();
     });
 
-    Route::get('routes', function() {
-        return \App\Route::getAllRoutesWithPoints();
-    });
-
-    Route::get('route/{id}', function($id) {
-        return \App\Route::find($id)->getWithPoints();
-    });
 
 
 
