@@ -1,0 +1,15 @@
+.hide {
+  display: none;
+}
+
+#pointCreateForm {
+  position: absolute;
+  z-index: 110;
+}
+#pointCreateForm .card {
+  height: 85vh;
+  width: 60vw;
+  z-index: 110;
+}
+
+/*# sourceMappingURL=PointCreate.css.map */

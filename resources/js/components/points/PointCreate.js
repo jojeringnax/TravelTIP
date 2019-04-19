@@ -1,7 +1,8 @@
 import axios from 'axios'
 import React, { Component } from 'react'
+import './PointCreate.css';
 
-class PointCreate extends Component {
+class PointCreate extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -85,9 +86,14 @@ class PointCreate extends Component {
         )
     }
 
+    createPoint = () => {
+        console.log(this.props);
+    };
+
+
     render() {
         return (
-            <div className='container py-4'>
+            <div className='container py-4 hide' id="pointCreateForm">
                 <div className='row justify-content-center'>
                     <div className='col-md-6'>
                         <div className='card'>
@@ -102,7 +108,7 @@ class PointCreate extends Component {
                                             id='description'
                                             className={`form-control ${this.hasErrorFor('description') ? 'is-invalid' : ''}`}
                                             name='description'
-                                            rows='10'
+                                            rows='4'
                                             value={this.state.description}
                                             onChange={this.handleFieldChange}
                                         />
@@ -110,9 +116,10 @@ class PointCreate extends Component {
                                     </div>
                                     {this.renderInput('number', 'status')}
                                     {this.renderInput('number', 'type')}
-                                    {this.renderInput('number','x_pos',0.1)}
-                                    {this.renderInput('number','y_pos',0.1)}
-                                    <button className='btn btn-primary'>Create</button>
+                                    {/*{this.renderInput('number','x_pos',0.1)}*/}
+                                    {/*{this.renderInput('number','y_pos',0.1)}*/}
+                                    <button onClick={this.createPoint} className='btn btn-outline-primary'>Create</button>
+                                    <button onClick={()=>{document.getElementById('pointCreateForm').classList.add('hide')}} className='btn btn-outline-danger'>Close</button>
                                 </form>
                             </div>
                         </div>
@@ -126,4 +133,4 @@ class PointCreate extends Component {
 
 
 
-export default PointCreate
+export default PointCreate;
