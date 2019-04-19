@@ -7,6 +7,7 @@ import PointCreate from './points/PointCreate'
 import Main from './Main'
 import Routes from './Routes'
 import RouteShow from './RouteShow'
+import Generator from './Generator'
 
 
 const RouteToShow = ({ match }) => (
@@ -29,7 +30,7 @@ class App extends Component {
                         <Route exact path='/admin/point/create' component={PointCreate} />
                         <Route path='/routes' component={Routes} />
                         <Route path='/route/:id' component={RouteToShow} />
-                        <Route path='/generator' component={Routes} />
+                        <Route path='/generator' component={Generator} />
                     </Switch>
                 </div>
             </BrowserRouter>

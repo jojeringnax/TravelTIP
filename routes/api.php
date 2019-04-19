@@ -25,8 +25,12 @@ Route::get('/route/{id}', function($id) {
     return \App\Route::find($id)->getWithPoints();
 });
 
-Route::get('/routes', function(\Illuminate\Http\Request $request) {
+Route::get('/routes', function() {
     return \App\Route::getAllRoutesWithPoints();
+});
+
+Route::get('/route_types', function() {
+    return \App\RouteType::all()->toJson();
 });
 
 

@@ -36,6 +36,8 @@
         "@babel/plugin-proposal-class-properties": "^7.4.0",
         "@ishawnwang/withunmounted": "^1.0.1",
         "prop-types": "^15.7.2",
+        "rc-slider": "^8.6.9",
+        "react-compound-slider": "^1.2.1",
         "react-google-maps": "^9.4.5",
         "react-router-dom": "^5.0.0",
         "styled-components": "^4.2.0",
