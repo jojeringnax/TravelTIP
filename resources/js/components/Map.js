@@ -1,8 +1,9 @@
-import React from "react"
-import { compose, withProps, withHandlers, withState, lifecycle } from "recompose"
-import {withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps"
-import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel"
+import React from "react";
+import { compose, withProps, withHandlers, withState, lifecycle } from "recompose";
+import {withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps";
+import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 import {Link} from "react-router-dom";
+import './App.css';
 
 
 
@@ -11,7 +12,7 @@ const MapConst = compose(
     withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBvVoT7eYE-TriltLJEbAPivTfjZ7O1S4w",
         loadingElement: <div style={{ height: `100%` }} />,
-        containerElement: <div id='mapping' style={{ height: window.innerHeight  }} />,
+        containerElement: <div id='mapping' />,
         mapElement: <div style={{ height: `100%` }} />,
     }),
     withState('center', 'onCenterChanged', { lat: 23.18, lng: 71.58 }),
@@ -44,6 +45,9 @@ const MapConst = compose(
                     })
                 },
                 onDblClick: (event) => {
+                    console.log('---state',this.state);
+                    document.getElementById('pointCreateForm').classList.remove('hide');
+
                     const Marker = new google.maps.Marker(event.latLng);
                     let markers = this.props.markers;
                     let newID = markers[markers.length - 1].id + 1;
@@ -54,14 +58,22 @@ const MapConst = compose(
                         x_pos: event.latLng.lat(),
                         y_pos: event.latLng.lng()
                     });
-
-
+                    // this.props.newMarkers = {
+                    //     id: newID,
+                    //     name: 'No name',
+                    //     description: 'faf',
+                    //     x_pos: event.latLng.lat(),
+                    //     y_pos: event.latLng.lng()
+                    // };
+                    //console.log(this.props.markers[newID-1].name = '123123');
+                    this.setState({addMark: true});
                 }
 
             })
         }
     })
 )((props) =>
+
     <GoogleMap
         center={props.center}
         ref={props.onMapMounted}
@@ -71,8 +83,8 @@ const MapConst = compose(
         onDblClick={props.onDblClick}
         defaultOptions={{disableDoubleClickZoom: true}}
     >
-    <div style={{position: 'absolute', zIndex: 100, right: 0, top: document.getElementById('navigation').clientHeight, left: 'auto'}}>
-        <div className='card' style={{height: window.innerHeight}}>
+    <div style={{position: 'absolute', zIndex: 100, right: 0, top: '0', left: 'auto'}}>
+        <div className='card' id='coordUsers'>
             <div className='card-header'>All points</div>
             <div className='card-body' id="points" style={{overflow: 'scroll'}}>
                 <Link className='btn btn-primary btn-sm mb-3' to='/create'>

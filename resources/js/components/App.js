@@ -23,6 +23,7 @@ class App extends Component {
         return (
             <BrowserRouter>
                 <div id="main_wrapper">
+                    <PointCreate />
                     <Header />
                     <Switch>
                         <Route exact path='/' component={Main} />
