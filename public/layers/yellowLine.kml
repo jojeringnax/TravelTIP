@@ -1,0 +1,48 @@
+      <?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://earth.google.com/kml/2.1">
+<!-- Data derived from:
+       Ed Knittel - || tastypopsicle.com
+       Feel free to use this file for your own purposes.
+       Just leave the comments and credits when doing so.
+-->
+  <Document>
+    <name>Chicago Transit Map</name>
+    <description>Chicago Transit Authority train lines</description>
+	<Style id="yellowLine">
+      <LineStyle>
+        <color>ff61f2f2</color>
+        <width>4</width>
+      </LineStyle>
+    </Style>
+      <Placemark>
+      <name>Yellow Line</name>
+      <styleUrl>#yellowLine</styleUrl>
+      <LineString>
+        <altitudeMode>relative</altitudeMode>
+        <coordinates>
+-87.75250,42.04049,0
+-87.74726629257202,42.02620267868042,0
+-87.74621486663818,42.0246148109436,0
+-87.7447772026062,42.02352046966553,0
+-87.74299621582031,42.02279090881348,0
+-87.74123668670654,42.02244758605957,0
+-87.73864030838013,42.02244758605957,0
+-87.7224612236023,42.02253341674805,0
+-87.71857738494873,42.02274799346924,0
+-87.70164728164673,42.02274799346924,0
+-87.6994800567627,42.022597789764404,0
+-87.69748449325562,42.022318840026855,0
+-87.6934289932251,42.022361755371094,0
+-87.68842935562134,42.02191114425659,0
+-87.67958879470825,42.02188968658447,0
+-87.67855882644653,42.021803855895996,0
+-87.67757177352905,42.021610736846924,0
+-87.67619848251343,42.021117210388184,0
+-87.6747179031372,42.02038764953613,0
+-87.67283499240875,42.019110918045044,0
+        </coordinates>
+      </LineString>
+    </Placemark>
+
+  </Document>
+</kml>
