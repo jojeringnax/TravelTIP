@@ -33,12 +33,12 @@ Route::get('/route_types', function() {
     return \App\RouteType::all()->toJson();
 });
 
+Route::get('points', function() {
+    return \App\Point::all()->toJson();
+});
 
 Route::group(['middleware' => ['auth:api']], function () {
 
-    Route::get('points', function() {
-        return \App\Point::all()->toJson();
-    });
 
     Route::get('point/{id}', function($id) {
         return \App\Point::find($id)->toJson();

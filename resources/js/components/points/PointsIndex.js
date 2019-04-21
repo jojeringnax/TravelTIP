@@ -9,7 +9,8 @@ class PointsIndex extends Component {
         super();
         this.state = {
             points: [],
-            auth: false
+            auth: false,
+            kmlLayers: []
         };
 
         this.handleClick = this.handleClick.bind(this);
@@ -37,7 +38,7 @@ class PointsIndex extends Component {
 
     render () {
         return (
-            <Map markers={this.state.points} handleMarkerClick={() => alert('fa')} />
+            <Map kmlLayers={this.state.kmlLayers} markers={[]} handleMarkerClick={() => alert('fa')} />
         )
     }
 }

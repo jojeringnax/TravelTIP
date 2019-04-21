@@ -1,12 +1,20 @@
 import React from "react";
 import { compose, withProps, withHandlers, withState, lifecycle } from "recompose";
-import {withScriptjs, withGoogleMap, GoogleMap} from "react-google-maps";
+import {withScriptjs, withGoogleMap, GoogleMap, KmlLayer} from "react-google-maps";
 import MarkerWithLabel from "react-google-maps/lib/components/addons/MarkerWithLabel";
 import {Link} from "react-router-dom";
 import './App.css';
+import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
 
+const KmlFirst = () => {
+    return(
+        <KmlLayer
+            url="http://traveltip.xxx/layers/cta.kml"
+            options={{preserveViewport: false}}
+        />
+        )
 
-
+};
 
 const MapConst = compose(
     withProps({
@@ -23,6 +31,9 @@ const MapConst = compose(
         };
 
         return {
+            onMarkerClustererClick: () => (markerClusterer) => {
+                const clickedMarkers = markerClusterer.getMarkers();
+            },
             onMapMounted: ({ onMapMounted }) => ref => {
                 refs.map = ref;
                 onMapMounted(ref)
@@ -45,7 +56,6 @@ const MapConst = compose(
                     })
                 },
                 onDblClick: (event) => {
-                    console.log('---state',this.state);
                     document.getElementById('pointCreateForm').classList.remove('hide');
 
                     const Marker = new google.maps.Marker(event.latLng);
@@ -70,6 +80,9 @@ const MapConst = compose(
                 }
 
             })
+        },
+        componentDidMount() {
+
         }
     })
 )((props) =>
@@ -79,18 +92,31 @@ const MapConst = compose(
         ref={props.onMapMounted}
         mapProp={props.mapProp}
         onCenterChanged={props.onCenterChanged}
-        defaultZoom={8}
+        defaultZoom={3}
         onDblClick={props.onDblClick}
         defaultOptions={{disableDoubleClickZoom: true}}
     >
-    <div style={{position: 'absolute', zIndex: 100, right: 0, top: '0', left: 'auto'}}>
+
+    <KmlFirst />
+
+    <div id="sideBar" style={{position: 'absolute', zIndex: 100, right: 0, top: '0', left: 'auto'}}>
         <div className='card' id='coordUsers'>
             <div className='card-header'>All points</div>
+            <button onClick={() => {document.getElementById('sideBar').classList.add('hide')}} className="btn btn-outline-secondary"> Пошел на хуй, Илья </button>
+
             <div className='card-body' id="points" style={{overflow: 'scroll'}}>
                 <Link className='btn btn-primary btn-sm mb-3' to='/create'>
                     Create new point
                 </Link>
+
+
                 <ul className='list-group list-group-flush'>
+                    <MarkerClusterer
+                        onClick={props.onMarkerClustererClick}
+                        averageCenter
+                        enableRetinaIcons
+                        gridSize={100}
+                    >
                     {props.markers.map(marker => (
                         <div key={marker.id}>
                             <div
@@ -102,21 +128,21 @@ const MapConst = compose(
                                 <div><span className='badge badge-primary badge-pill'>{marker.x_pos}</span>
                                     <span className='badge badge-primary badge-pill'>{marker.y_pos}</span></div>
                             </div>
-
-                        <MarkerWithLabel
-                            position={{ lat: marker.x_pos, lng: marker.y_pos }}
-                            labelAnchor={new google.maps.Point(marker.x_pos, marker.y_pos)}
-                            labelStyle={{backgroundColor: "yellow", fontSize: "10px", padding: "2px"}}
-                            onClick={ () => {
-                                let div = document.getElementById(marker.id + '_point');
-                                document.getElementById('points').scrollTop = div.offsetTop - div.offsetHeight;
-                                div.classList.add('lol');
-                            }}
-                        >
-                            <div>{ marker.name }</div>
-                        </MarkerWithLabel>
+                            <MarkerWithLabel
+                                position={{ lat: marker.x_pos, lng: marker.y_pos }}
+                                labelAnchor={new google.maps.Point(marker.x_pos, marker.y_pos)}
+                                labelStyle={{backgroundColor: "yellow", fontSize: "10px", padding: "2px"}}
+                                onClick={ () => {
+                                    let div = document.getElementById(marker.id + '_point');
+                                    document.getElementById('points').scrollTop = div.offsetTop - div.offsetHeight;
+                                    div.classList.add('lol');
+                                }}
+                            >
+                                <div>{ marker.name }</div>
+                            </MarkerWithLabel>
                         </div>
                     ))}
+                    </MarkerClusterer>
                 </ul>
             </div>
         </div>
