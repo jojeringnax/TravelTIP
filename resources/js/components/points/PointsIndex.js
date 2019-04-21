@@ -3,6 +3,8 @@ import React, { Component } from 'react'
 import { Link, Redirect } from 'react-router-dom'
 import Map from '.././Map'
 
+const Layers = [{url:"http://81.177.140.58/layers/blueLine.kml" },{url: "http://81.177.140.58/layers/yellowLine.kml"},{url: "http://81.177.140.58/layers/purpleLine.kml"}];
+
 class PointsIndex extends Component {
 
     constructor () {
@@ -10,7 +12,7 @@ class PointsIndex extends Component {
         this.state = {
             points: [],
             auth: false,
-            kmlLayers: []
+            kmlLayers: Layers
         };
 
         this.handleClick = this.handleClick.bind(this);

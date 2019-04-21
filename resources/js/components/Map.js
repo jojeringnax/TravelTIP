@@ -6,28 +6,6 @@ import {Link} from "react-router-dom";
 import './App.css';
 import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClusterer";
 
-const KmlFirst = () => {
-    return(
-        <>
-            <KmlLayer
-                url="http://81.177.140.58/layers/blueLine.kml"
-                options={{preserveViewport: false}}
-            />
-            <KmlLayer
-                url="http://81.177.140.58/layers/yellowLine.kml"
-                options={{preserveViewport: false}}
-            />
-            <KmlLayer
-            url="http://81.177.140.58/layers/purpleLine.kml"
-            options={{preserveViewport: false}}
-            />
-
-        </>
-
-        )
-
-};
-
 const MapConst = compose(
     withProps({
         googleMapURL: "https://maps.googleapis.com/maps/api/js?key=AIzaSyBvVoT7eYE-TriltLJEbAPivTfjZ7O1S4w",
@@ -108,8 +86,14 @@ const MapConst = compose(
         onDblClick={props.onDblClick}
         defaultOptions={{disableDoubleClickZoom: true}}
     >
-
-    <KmlFirst />
+        {
+            props.kmlLayers.map(layer => (
+                <KmlLayer
+                    url={layer.url}
+                    options={{preserveViewport: false}}
+                />
+            ))
+        }
 
     <div id="sideBar" style={{position: 'absolute', zIndex: 100, right: 0, top: '0', left: 'auto'}}>
         <div className='card' id='coordUsers'>
