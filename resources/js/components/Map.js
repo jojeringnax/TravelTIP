@@ -8,10 +8,22 @@ import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClust
 
 const KmlFirst = () => {
     return(
-        <KmlLayer
-            url="http://81.177.140.58/layers/cta.kml"
+        <>
+            <KmlLayer
+                url="http://81.177.140.58/layers/blueLine.kml"
+                options={{preserveViewport: false}}
+            />
+            <KmlLayer
+                url="http://81.177.140.58/layers/yellowLine.kml"
+                options={{preserveViewport: false}}
+            />
+            <KmlLayer
+            url="http://81.177.140.58/layers/purpleLine.kml"
             options={{preserveViewport: false}}
-        />
+            />
+
+        </>
+
         )
 
 };
