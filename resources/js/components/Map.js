@@ -9,7 +9,7 @@ import MarkerClusterer from "react-google-maps/lib/components/addons/MarkerClust
 const KmlFirst = () => {
     return(
         <KmlLayer
-            url="http://traveltip.xxx/layers/cta.kml"
+            url="http://81.177.140.58/layers/cta.kml"
             options={{preserveViewport: false}}
         />
         )
